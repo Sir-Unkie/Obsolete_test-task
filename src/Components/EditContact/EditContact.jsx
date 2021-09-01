@@ -4,6 +4,7 @@ import CustomButton from '../CustomButton/CustomButton';
 import { storage, db } from '../../Firebase/config';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { doc, updateDoc } from 'firebase/firestore';
+import SuspenseSpinner from '../SuspenseSpinner/SuspenseSpinner';
 
 const EditContact = ({ toggleForm, id, name, phone, group, url }) => {
   const initialData = {
@@ -13,6 +14,7 @@ const EditContact = ({ toggleForm, id, name, phone, group, url }) => {
     URL: url,
   };
   const [data, setData] = useState(initialData);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
@@ -46,6 +48,7 @@ const EditContact = ({ toggleForm, id, name, phone, group, url }) => {
       alert('please fill all the fields');
       return;
     }
+    setLoading(true);
     const imageFile = e.target.querySelector('#Photo').files[0];
     if (!imageFile || allowedTypes.includes(imageFile.type)) {
       // send to firebase
@@ -64,7 +67,7 @@ const EditContact = ({ toggleForm, id, name, phone, group, url }) => {
         Group: data.Group,
         URL: url,
       });
-
+      setLoading(false);
       // in the end close the form
       toggleForm();
     } else {
@@ -76,6 +79,7 @@ const EditContact = ({ toggleForm, id, name, phone, group, url }) => {
   return (
     <React.Fragment>
       <div onClick={toggleForm} className={styles.formBG}></div>
+      {loading && <SuspenseSpinner></SuspenseSpinner>}
       <form onSubmit={submitHandler} action='' className={styles.form}>
         {error && <div className={styles.error}>{error}</div>}
         <div className={styles.formGroup}>

@@ -4,7 +4,7 @@ import CustomButton from '../CustomButton/CustomButton';
 import { storage, db } from '../../Firebase/config';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc } from 'firebase/firestore';
-
+import SuspenseSpinner from '../SuspenseSpinner/SuspenseSpinner';
 // i know that Add new contact form and Edit contact form could be created from one 'parent' component to eliminate repeating of the code
 // but i didnt have time to rearrange the component so the faster solution here was to create 2 similar forms with a slightly different logic
 const AddNewContactForm = ({ toggleForm }) => {
@@ -15,6 +15,7 @@ const AddNewContactForm = ({ toggleForm }) => {
   };
   const [data, setData] = useState(initialData);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
 
@@ -47,6 +48,7 @@ const AddNewContactForm = ({ toggleForm }) => {
       alert('please fill all the fields');
       return;
     }
+    setLoading(true);
     const imageFile = e.target.querySelector('#Photo').files[0];
     let url = '';
     if (!imageFile || allowedTypes.includes(imageFile.type)) {
@@ -66,6 +68,7 @@ const AddNewContactForm = ({ toggleForm }) => {
         URL: url,
       });
       // in the end close the form
+      setLoading(false);
       toggleForm();
     } else {
       setError('Please select an image file (png, jpeg or jpg)');
@@ -76,6 +79,7 @@ const AddNewContactForm = ({ toggleForm }) => {
   return (
     <React.Fragment>
       <div onClick={toggleForm} className={styles.formBG}></div>
+      {loading && <SuspenseSpinner></SuspenseSpinner>}
       <form onSubmit={submitHandler} action='' className={styles.form}>
         {error && <div className={styles.error}>{error}</div>}
         <div className={styles.formGroup}>
