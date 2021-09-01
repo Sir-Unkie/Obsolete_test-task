@@ -1,0 +1,26 @@
+.info {
+  position: relative;
+  font-size: 4rem;
+  color: white;
+  margin: auto;
+  &::after {
+    transition: all 0.2s;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    padding: 2rem;
+    border-radius: 2rem;
+    left: -100%;
+    width: 300%;
+    background-color: var(--color-2);
+    text-align: center;
+    content: 'All the data and images are stored in the cloud Firebase database';
+  }
+  &:hover {
+    cursor: pointer;
+
+    &::after {
+      opacity: 1;
+    }
+  }
+}

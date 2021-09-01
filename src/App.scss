@@ -1,0 +1,13 @@
+.App {
+  background-color: var(--color-5);
+  padding-top: 10rem;
+  min-height: calc(100vh - 10rem);
+}
+
+.AppContainer {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}

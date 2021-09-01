@@ -1,0 +1,40 @@
+.contactCard {
+  padding: 2rem;
+  display: flex;
+  gap: 3rem;
+  border-radius: 2rem;
+  background-color: var(--color-1);
+  &:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+
+  .image {
+    width: 8vw;
+    height: 8vw;
+
+    // border: 1px solid red;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .textContent {
+    width: 30%;
+  }
+
+  .buttonsContainer {
+    margin-top: 2rem;
+    justify-self: flex-end;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    .icon {
+      border: 1px solid black;
+      padding: 1rem;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

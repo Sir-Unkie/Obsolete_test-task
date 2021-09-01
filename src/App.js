@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import Contacts from './Components/Contacts/Contacts';
+import AddNewContactForm from './Components/AddNewContactForm/AddNewContactForm';
+import CustomButton from './Components/CustomButton/CustomButton';
+import { useState } from 'react';
+import InfoBlock from './Components/InfoBlock/InfoBlock';
 
 function App() {
+  const [newContactVisible, setNewContactVisible] = useState(false);
+  const toggleForm = () => {
+    setNewContactVisible(prevState => !prevState);
+  };
   return (
     <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>
-          Edit ok, i ll doit<code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='AppContainer'>
+        <InfoBlock></InfoBlock>
+        <CustomButton type={'button'} clickHandler={toggleForm}>
+          Add new contact
+        </CustomButton>
+        {newContactVisible && (
+          <AddNewContactForm toggleForm={toggleForm}></AddNewContactForm>
+        )}
+        <Contacts />
+      </div>
     </div>
   );
 }

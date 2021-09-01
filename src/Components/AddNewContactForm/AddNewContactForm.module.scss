@@ -1,0 +1,45 @@
+.formBG {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.774);
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.form {
+  border-radius: 2rem;
+  font-size: 2rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  min-height: 30vh;
+  background-color: var(--color-2);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 3rem;
+
+  .formGroup {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 4rem;
+    align-items: baseline;
+
+    label {
+      display: inline-block;
+      width: 7rem;
+    }
+
+    input {
+      padding: 1rem;
+      font-size: 2rem;
+    }
+  }
+}
